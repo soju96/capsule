@@ -1,3 +1,4 @@
+import 'package:capsule/src/widgets/custom_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,28 +26,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: Image.asset('assets/images/clover.png'),
-            ),
-            Transform.translate(
-              offset: const Offset(0, -30),
-              child: FloatingActionButton(
-                onPressed: () {},
-              ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Image.asset('assets/logos/user.png'),
-            )
-          ],
-        ),
-      ),
+      bottomNavigationBar: const CustomBottomAppBar(),
     );
   }
 }
-//

@@ -25,17 +25,26 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Image.asset(
+              'assets/images/clover.png',
+              width: 40,
+            ),
             label: '홈',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Image.asset(
+              'assets/images/pen.png',
+              width: 40,
+            ),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Image.asset(
+              'assets/images/clover.png',
+              width: 40,
+            ),
             label: '마이 페이지',
           ),
         ],

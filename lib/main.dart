@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         ),
         cardColor: const Color.fromRGBO(166, 119, 78, 1),
       ),
+      home: const HomeScreen(),
     );
   }
 }

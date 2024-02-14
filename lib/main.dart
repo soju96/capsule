@@ -1,4 +1,5 @@
 import 'package:capsule/src/pages/home_screen.dart';
+import 'package:capsule/src/pages/shelf_list_hj.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
       ),
 
       // 홈
-      home: const HomeScreen(),
+      home: const ShelfList(),
     );
   }
 }

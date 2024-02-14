@@ -1,4 +1,4 @@
-import 'package:capsule/src/pages/HomeScreen.dart';
+import 'package:capsule/src/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,15 +22,10 @@ class MyApp extends StatelessWidget {
           backgroundColor: const Color(0xfffffcf1),
         ),
         // 네비게이션 컬러
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Color(0xFF6c4c1c),
-          // 선택 안됐을때 글자
-          unselectedLabelStyle:
-              TextStyle(color: Colors.white, fontFamily: 'sehyun'),
-          // 선택 됐을때 글자
-          selectedLabelStyle:
-              TextStyle(color: Colors.white, fontFamily: 'sehyun'),
+        bottomAppBarTheme: const BottomAppBarTheme(
+          color: Color(0xFF6c4c1c),
         ),
+
         // 앱바 글자
         appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(color: Colors.white, fontFamily: 'sehyun'),
@@ -41,6 +36,7 @@ class MyApp extends StatelessWidget {
           titleLarge: TextStyle(color: Colors.white, fontFamily: 'sehyun'),
         ),
       ),
+
       // 홈
       home: const HomeScreen(),
     );

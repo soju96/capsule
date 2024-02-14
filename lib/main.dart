@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // 위에 컬러
         primaryColor: const Color(0xFF6c4c1c),
+        canvasColor: const Color(0xfffffcf1),
         // 백그라운드 컬러
         colorScheme: ColorScheme.fromSwatch(
           backgroundColor: const Color(0xfffffcf1),

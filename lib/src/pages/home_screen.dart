@@ -1,3 +1,4 @@
+import 'package:capsule/src/widgets/custom_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -25,32 +26,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/images/clover.png',
-              width: 40,
-            ),
-            label: '홈',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/images/pen.png',
-              width: 40,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/logos/user.png',
-              width: 40,
-            ),
-            label: '마이 페이지',
-          ),
-        ],
-      ),
+      bottomNavigationBar: const CustomBottomAppBar(),
     );
   }
 }
-//

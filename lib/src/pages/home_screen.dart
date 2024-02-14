@@ -7,6 +7,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         title: const Text(
           '님의 행복 저금통',
           style: TextStyle(fontFamily: 'seoyoon'),
@@ -42,7 +43,7 @@ class HomeScreen extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/images/clover.png',
+              'assets/logos/user.png',
               width: 40,
             ),
             label: '마이 페이지',

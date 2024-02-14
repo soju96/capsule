@@ -7,9 +7,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         title: const Text(
           '테스트',
-          style: TextStyle(fontFamily: 'seoyoon'),
         ),
       ),
       body: Image.asset('assets/images/bottle.png'),

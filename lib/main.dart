@@ -1,4 +1,4 @@
-import 'package:capsule/src/pages/HomeScreen.dart';
+import 'package:capsule/src/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
           titleLarge: TextStyle(color: Colors.white, fontFamily: 'sehyun'),
         ),
       ),
+
       // 홈
       home: const HomeScreen(),
     );

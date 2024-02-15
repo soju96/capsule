@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       ),
 
       // 홈
-      home: const GuideScreen(),
+      home: const HomeScreen(),
     );
   }
 }

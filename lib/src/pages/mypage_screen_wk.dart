@@ -11,31 +11,53 @@ class MyPageScreen extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.all(30),
         child: const Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text('닉네임'), Text('data')],
+            Column(
+              children: [
+                MyPageRowMenu(name: '닉네임', action: Text('닉네임')),
+                MyPageRowMenu(name: '이메일', action: Text('닉네임')),
+                MyPageRowMenu(
+                    name: '사용자 가이드', action: Icon(Icons.arrow_forward_ios)),
+                MyPageRowMenu(
+                  name: '회원탈퇴',
+                  action: Icon(Icons.arrow_forward_ios),
+                ),
+              ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text('이메일'), Text('data')],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text('사용자 가이드'), Icon(Icons.arrow_forward_ios)],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text('회원 탈퇴'), Icon(Icons.arrow_forward_ios)],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text('로그아웃'), Icon(Icons.arrow_forward_ios)],
+            MyPageRowMenu(
+              name: '로그아웃',
+              action: Icon(Icons.arrow_forward_ios),
             ),
           ],
         ),
       ),
       bottomNavigationBar: const CustomBottomAppBar(),
+    );
+  }
+}
+
+class MyPageRowMenu extends StatelessWidget {
+  final String name;
+  final Widget action;
+
+  const MyPageRowMenu({
+    super.key,
+    required this.name,
+    required this.action,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          name,
+          style: const TextStyle(fontSize: 18),
+        ),
+        action
+      ],
     );
   }
 }

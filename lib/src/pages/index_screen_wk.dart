@@ -25,12 +25,31 @@ class indexScreen extends StatelessWidget {
                 '오늘의 행복을 오래동안',
                 style: TextStyle(fontSize: 30),
               ),
-              const Text('일상생활에서의 행복을 남기세요.'),
+              const Text(
+                '일상생활에서의 행복을 남기세요.',
+                style: TextStyle(fontSize: 17),
+              ),
               const SizedBox(
                 height: 100,
               ),
               FloatingActionButton.extended(
-                  onPressed: () {}, label: const Text('data'))
+                backgroundColor: Theme.of(context).primaryColor,
+                onPressed: () {},
+                label: const Text(
+                  '로그인',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  '회원가입',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
+              )
             ],
           ),
         ),

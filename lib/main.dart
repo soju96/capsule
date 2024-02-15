@@ -1,4 +1,6 @@
 import 'package:capsule/src/pages/home_screen.dart';
+import 'package:capsule/src/pages/index_screen.dart';
+import 'package:capsule/src/pages/mypage_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

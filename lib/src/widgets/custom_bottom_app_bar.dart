@@ -1,3 +1,4 @@
+import 'package:capsule/src/pages/memo_screen_sj.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
@@ -25,7 +26,12 @@ class CustomBottomAppBar extends StatelessWidget {
                 color: Theme.of(context).canvasColor,
               ),
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  // IconButton을 누를 때 MemoInput 위젯으로 화면을 전환합니다.
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const MemoInput(),
+                  ));
+                },
                 icon: Image.asset('assets/images/pen.png'),
               ),
             ),

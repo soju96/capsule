@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-// 일단 파일만 만들어 놓고 나중에 업데이트 합니다.
-
 class MemoInput extends StatefulWidget {
   const MemoInput({super.key});
 
@@ -12,6 +10,20 @@ class MemoInput extends StatefulWidget {
 class _MemoInputState extends State<MemoInput> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        title: const Text(
+          '쪽지1',
+          style: TextStyle(fontFamily: 'seoyoon'),
+        ),
+      ),
+      body: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [Text('여기에 이제 메모지를 만들어 넣겠습니다..')],
+        ),
+      ),
+    );
   }
 }

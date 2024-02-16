@@ -73,6 +73,13 @@ flutter:
     - assets/logos/home.png
     - assets/images/shelf.png
     - assets/logos/user.png
+    - assets/images/bottle_5.png
+    - assets/images/bottle_10.png
+    - assets/images/bottle_15.png
+    - assets/images/bottle_19.png
+    - assets/images/bottle_20.png
+    - assets/images/bottle_20_nocap.png
+    - assets/images/empty_uncap_bottle.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

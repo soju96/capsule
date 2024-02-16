@@ -1,8 +1,7 @@
-import 'package:capsule/src/widgets/custom_bottom_app_bar_wk.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class BottleScreen extends StatelessWidget {
+  const BottleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +10,6 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).primaryColor,
         title: const Text(
           '님의 행복 저금통',
-          style: TextStyle(fontFamily: 'seoyoon'),
         ),
       ),
       body: Center(
@@ -21,8 +19,12 @@ class HomeScreen extends StatelessWidget {
             Stack(
               alignment: Alignment.center,
               children: [
+                // Image.asset(
+                //   'assets/images/memo.png',
+                //   width: 70,
+                // ),
                 Image.asset(
-                  'assets/images/bottle.png',
+                  'assets/images/empty_uncap_bottle.png',
                   width: 300,
                 ),
                 Column(
@@ -57,11 +59,10 @@ class HomeScreen extends StatelessWidget {
                 )
               ],
             ),
-            Image.asset('assets/images/shelf.png')
+            Image.asset('assets/images/shelf.png'),
           ],
         ),
       ),
-      bottomNavigationBar: const CustomBottomAppBar(),
     );
   }
 }

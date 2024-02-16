@@ -1,8 +1,7 @@
-import 'package:capsule/src/widgets/custom_bottom_app_bar_wk.dart';
 import 'package:flutter/material.dart';
 
-class indexScreen extends StatelessWidget {
-  const indexScreen({super.key});
+class IndexScreen extends StatelessWidget {
+  const IndexScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +53,6 @@ class indexScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const CustomBottomAppBar(),
     );
   }
 }

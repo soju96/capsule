@@ -1,4 +1,4 @@
-import 'package:capsule/src/widgets/custom_bottom_app_bar_wk.dart';
+import 'package:capsule/src/pages/guide_wk.dart';
 import 'package:flutter/material.dart';
 
 class MyPageScreen extends StatelessWidget {
@@ -7,32 +7,50 @@ class MyPageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        title: const Text(
+          '마이 페이지',
+        ),
+      ),
       body: Container(
         padding: const EdgeInsets.all(30),
-        child: const Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               children: [
-                MyPageRowMenu(name: '닉네임', action: Text('닉네임')),
-                MyPageRowMenu(name: '이메일', action: Text('닉네임')),
+                const MyPageRowMenu(name: '닉네임', action: Text('닉네임')),
+                const MyPageRowMenu(name: '이메일', action: Text('닉네임')),
                 MyPageRowMenu(
-                    name: '사용자 가이드', action: Icon(Icons.arrow_forward_ios)),
+                  name: '사용자 가이드',
+                  action: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Guide(),
+                          ));
+                    },
+                    icon: const Icon(Icons.arrow_forward_ios),
+                  ),
+                ),
                 MyPageRowMenu(
                   name: '회원탈퇴',
-                  action: Icon(Icons.arrow_forward_ios),
+                  action: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.arrow_forward_ios),
+                  ),
                 ),
               ],
             ),
-            MyPageRowMenu(
+            const MyPageRowMenu(
               name: '로그아웃',
               action: Icon(Icons.arrow_forward_ios),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: const CustomBottomAppBar(),
     );
   }
 }

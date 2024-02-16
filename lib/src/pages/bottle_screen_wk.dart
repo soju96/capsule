@@ -1,8 +1,7 @@
-import 'package:capsule/src/widgets/custom_bottom_app_bar_wk.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class BottleScreen extends StatelessWidget {
+  const BottleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +10,6 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).primaryColor,
         title: const Text(
           '님의 행복 저금통',
-          style: TextStyle(fontFamily: 'seoyoon'),
         ),
       ),
       body: Center(
@@ -21,6 +19,10 @@ class HomeScreen extends StatelessWidget {
             Stack(
               alignment: Alignment.center,
               children: [
+                // Image.asset(
+                //   'assets/images/memo.png',
+                //   width: 70,
+                // ),
                 Image.asset(
                   'assets/images/bottle.png',
                   width: 300,
@@ -41,14 +43,15 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border:
-                            Border.all(color: Theme.of(context).primaryColor),
+                        border: Border.all(
+                          color: Theme.of(context).primaryColor,
+                        ),
                       ),
                       child: IconButton(
                         onPressed: () {},
                         icon: const Icon(
                           Icons.add,
-                          size: 60,
+                          size: 50,
                         ),
                         color: Theme.of(context).primaryColor,
                       ),
@@ -57,11 +60,10 @@ class HomeScreen extends StatelessWidget {
                 )
               ],
             ),
-            Image.asset('assets/images/shelf.png')
+            Image.asset('assets/images/shelf.png'),
           ],
         ),
       ),
-      bottomNavigationBar: const CustomBottomAppBar(),
     );
   }
 }

@@ -29,7 +29,6 @@ class GuideContentScreen extends StatelessWidget {
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 20),
           ),
-          const SizedBox(height: 20),
         ],
       ),
     );

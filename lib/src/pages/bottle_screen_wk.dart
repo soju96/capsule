@@ -43,14 +43,15 @@ class BottleScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border:
-                            Border.all(color: Theme.of(context).primaryColor),
+                        border: Border.all(
+                          color: Theme.of(context).primaryColor,
+                        ),
                       ),
                       child: IconButton(
                         onPressed: () {},
                         icon: const Icon(
                           Icons.add,
-                          size: 60,
+                          size: 50,
                         ),
                         color: Theme.of(context).primaryColor,
                       ),

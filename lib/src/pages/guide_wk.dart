@@ -59,18 +59,52 @@ class _GuideState extends State<Guide> {
           // )
         ],
       ),
-      body: PageView(
-        controller: _controller,
-        onPageChanged: _onPageChanged,
-        children: const [
-          GuideContentScreen(
-            imgName: 'assets/images/memo.png',
-            description: '쪽지를 작성하여 당신의 행복을 기록하세요.',
+      body: Column(
+        children: [
+          const SizedBox(
+            height: 100,
           ),
-          GuideContentScreen(
-            imgName: 'assets/images/bottle.png',
-            description: '유리병은 최대 20개까지 쪽지를 저장 할 수 있습니다.',
+          Expanded(
+            child: PageView(
+              controller: _controller,
+              onPageChanged: _onPageChanged,
+              children: const [
+                GuideContentScreen(
+                  imgName: 'assets/images/memo.png',
+                  description: '쪽지를 작성하여 당신의 행복을 기록하세요.',
+                ),
+                GuideContentScreen(
+                  imgName: 'assets/images/bottle_20.png',
+                  description: '유리병은 최대 20개까지 쪽지를 저장 할 수 있습니다.',
+                ),
+              ],
+            ),
           ),
+          SizedBox(
+            height: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                2,
+                (index) => Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Container(
+                    width: 15,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.black),
+                      color: index == _currentPage
+                          ? Theme.of(context).primaryColor
+                          : Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 50,
+          )
         ],
       ),
     );

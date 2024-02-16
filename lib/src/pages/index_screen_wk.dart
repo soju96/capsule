@@ -1,13 +1,11 @@
-import 'package:capsule/src/widgets/custom_bottom_app_bar_wk.dart';
 import 'package:flutter/material.dart';
 
-class indexScreen extends StatelessWidget {
-  const indexScreen({super.key});
+class IndexScreen extends StatelessWidget {
+  const IndexScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Center(
@@ -32,12 +30,12 @@ class indexScreen extends StatelessWidget {
               const SizedBox(
                 height: 100,
               ),
-              FloatingActionButton.extended(
-                backgroundColor: Theme.of(context).primaryColor,
+              TextButton(
                 onPressed: () {},
-                label: const Text(
+                child: Text(
                   '로그인',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(
+                      fontSize: 18, color: Theme.of(context).primaryColor),
                 ),
               ),
               TextButton(
@@ -54,7 +52,6 @@ class indexScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const CustomBottomAppBar(),
     );
   }
 }

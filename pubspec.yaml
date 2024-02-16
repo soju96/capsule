@@ -73,6 +73,7 @@ flutter:
     - assets/logos/home.png
     - assets/images/shelf.png
     - assets/logos/user.png
+
     - assets/images/bottle_5.png
     - assets/images/bottle_10.png
     - assets/images/bottle_15.png

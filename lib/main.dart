@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       ),
 
       // 홈
-      home: const ShelfList(),
+      home:  ,
     );
   }
 }

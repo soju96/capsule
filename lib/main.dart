@@ -1,7 +1,5 @@
 import 'package:capsule/src/pages/guide_wk.dart';
-import 'package:capsule/src/pages/bottle_screen_wk.dart';
-import 'package:capsule/src/pages/index_screen_wk.dart';
-import 'package:capsule/src/pages/mypage_screen_wk.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,6 +12,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // This trailing comma makes auto-formatting nicer for build methods.
+
     return MaterialApp(
       theme: ThemeData(
         // 위에 컬러
@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
       ),
 
       // 홈
+
       home: const Guide(),
     );
   }

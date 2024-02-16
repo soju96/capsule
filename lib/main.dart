@@ -1,5 +1,11 @@
-import 'package:capsule/src/pages/home_screen.dart';
+
 import 'package:capsule/src/pages/shelf_list_hj.dart';
+
+import 'package:capsule/src/pages/guide_screen_wk.dart';
+import 'package:capsule/src/pages/home_screen_wk.dart';
+import 'package:capsule/src/pages/index_screen_wk.dart';
+import 'package:capsule/src/pages/mypage_screen_wk.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {

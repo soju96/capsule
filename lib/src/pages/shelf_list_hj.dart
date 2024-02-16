@@ -1,5 +1,5 @@
 // 홈 눌렀을때 넘어오는 페이지
-import 'package:capsule/src/widgets/custom_bottom_app_bar.dart';
+
 import 'package:flutter/material.dart';
 
 class ShelfList extends StatelessWidget {
@@ -47,7 +47,7 @@ class ShelfList extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const CustomBottomAppBar(),
+      bottomNavigationBar: const BottomAppBar(),
     );
   }
 }

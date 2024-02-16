@@ -47,7 +47,7 @@ class ShelfList extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const BottomAppBar(),
+      bottomNavigationBar: const BottomAppBar(), 
     );
   }
 }

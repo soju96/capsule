@@ -1,4 +1,5 @@
 import 'package:capsule/src/pages/guide_wk.dart';
+import 'package:capsule/src/pages/index_screen_wk.dart';
 import 'package:flutter/material.dart';
 
 class MyPageScreen extends StatelessWidget {
@@ -44,9 +45,18 @@ class MyPageScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const MyPageRowMenu(
+            MyPageRowMenu(
               name: '로그아웃',
-              action: Icon(Icons.arrow_forward_ios),
+              action: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const IndexScreen(),
+                      ));
+                },
+                icon: const Icon(Icons.arrow_forward_ios),
+              ),
             ),
           ],
         ),

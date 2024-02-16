@@ -6,7 +6,6 @@ class IndexScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Center(
@@ -31,12 +30,12 @@ class IndexScreen extends StatelessWidget {
               const SizedBox(
                 height: 100,
               ),
-              FloatingActionButton.extended(
-                backgroundColor: Theme.of(context).primaryColor,
+              TextButton(
                 onPressed: () {},
-                label: const Text(
+                child: Text(
                   '로그인',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(
+                      fontSize: 18, color: Theme.of(context).primaryColor),
                 ),
               ),
               TextButton(

@@ -24,7 +24,7 @@ class BottleScreen extends StatelessWidget {
                 //   width: 70,
                 // ),
                 Image.asset(
-                  'assets/images/empty_uncap_bottle.png',
+                  'assets/images/bottle.png',
                   width: 300,
                 ),
                 Column(

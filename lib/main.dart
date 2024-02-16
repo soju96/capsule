@@ -15,20 +15,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // 위에 컬러
         primaryColor: const Color(0xFF6c4c1c),
+        canvasColor: const Color(0xfffffcf1),
         // 백그라운드 컬러
         colorScheme: ColorScheme.fromSwatch(
           backgroundColor: const Color(0xfffffcf1),
         ),
         // 네비게이션 컬러
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Color(0xFF6c4c1c),
-          // 선택 안됐을때 글자
-          unselectedLabelStyle:
-              TextStyle(color: Colors.white, fontFamily: 'sehyun'),
-          // 선택 됐을때 글자
-          selectedLabelStyle:
-              TextStyle(color: Colors.white, fontFamily: 'sehyun'),
+        bottomAppBarTheme: const BottomAppBarTheme(
+          color: Color(0xFF6c4c1c),
         ),
+
         // 앱바 글자
         appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(color: Colors.white, fontFamily: 'sehyun'),

@@ -1,3 +1,4 @@
+import 'package:capsule/src/widgets/base_floating_button_wk.dart';
 import 'package:flutter/material.dart';
 
 class BottleScreen extends StatelessWidget {
@@ -27,35 +28,35 @@ class BottleScreen extends StatelessWidget {
                   'assets/images/bottle.png',
                   width: 300,
                 ),
-                Column(
+                const Column(
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       height: 70,
                     ),
-                    const Text(
+                    Text(
                       '당신의 첫 행복을 적금하세요.',
                       style: TextStyle(fontSize: 20),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 25,
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.add,
-                          size: 50,
-                        ),
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
+                    // Container(
+                    //   padding: const EdgeInsets.all(10),
+                    //   decoration: BoxDecoration(
+                    //     shape: BoxShape.circle,
+                    //     border: Border.all(
+                    //       color: Theme.of(context).primaryColor,
+                    //     ),
+                    //   ),
+                    //   child: IconButton(
+                    //     onPressed: () {},
+                    //     icon: const Icon(
+                    //       Icons.add,
+                    //       size: 50,
+                    //     ),
+                    //     color: Theme.of(context).primaryColor,
+                    //   ),
+                    // ),
                   ],
                 )
               ],

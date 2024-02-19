@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import 'package:capsule/src/pages/login_screen_kl.dart';
 import 'package:capsule/src/pages/sign_up_screen_kl.dart';
+=======
+import 'package:capsule/src/pages/home_wk.dart';
+>>>>>>> 20e9a4e8b0cfc103098977e356a7848caa9f210c
 import 'package:flutter/material.dart';
 
 class IndexScreen extends StatelessWidget {
@@ -34,8 +38,16 @@ class IndexScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
+<<<<<<< HEAD
                   Navigator.push(context,
                       MaterialPageRoute(builder: (_) => const LogInScreen()));
+=======
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Home(),
+                      ));
+>>>>>>> 20e9a4e8b0cfc103098977e356a7848caa9f210c
                 },
                 child: Text(
                   '로그인',

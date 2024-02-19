@@ -1,5 +1,6 @@
 import 'package:capsule/src/pages/guide_content_screen_wk.dart';
 import 'package:capsule/src/pages/home_wk.dart';
+import 'package:capsule/src/pages/index_screen_wk.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +19,7 @@ class _GuideState extends State<Guide> {
   void initState() {
     super.initState();
     // _checkIfFirstTime(); // 이미 실행한 적이 있는 경우, 가이드 페이지를 보여주지 않음
+    // 개발 완료되면 주석 해제
   }
 
   void _checkIfFirstTime() async {
@@ -30,7 +32,7 @@ class _GuideState extends State<Guide> {
 
   void _navigateToNextScreen() {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => const Home()),
+      MaterialPageRoute(builder: (context) => const IndexScreen()),
     );
   }
 
@@ -74,8 +76,12 @@ class _GuideState extends State<Guide> {
                   description: '쪽지를 작성하여 당신의 행복을 기록하세요.',
                 ),
                 GuideContentScreen(
+                  imgName: 'assets/images/bottle.png',
+                  description: '유리병에 최대 20개까지 쪽지를 저장 할 수 있습니다.',
+                ),
+                GuideContentScreen(
                   imgName: 'assets/images/bottle_20.png',
-                  description: '유리병은 최대 20개까지 쪽지를 저장 할 수 있습니다.',
+                  description: '유리병에 쪽지가 차면 유리병을 열어서 담겨진 쪽지를 읽을 수 있습니다.',
                 ),
               ],
             ),
@@ -85,7 +91,7 @@ class _GuideState extends State<Guide> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                2,
+                3,
                 (index) => Padding(
                   padding: const EdgeInsets.all(8),
                   child: Container(

@@ -1,3 +1,4 @@
+import 'package:capsule/src/pages/home_wk.dart';
 import 'package:capsule/src/pages/search_account_screen_kl.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,13 @@ class LogInScreen extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Home(),
+                      ));
+                },
                 child: Text(
                   '로그인',
                   style: TextStyle(
@@ -61,7 +68,7 @@ class LogInScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (_) => const SearchAccountScreen()));

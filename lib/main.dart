@@ -1,13 +1,24 @@
 import 'package:capsule/src/pages/guide_wk.dart';
+import 'package:capsule/src/pages/index_screen_wk.dart';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
+  Widget initialScreen =
+      isFirstTime ? const Guide(isMyPaged: false) : const IndexScreen();
+  runApp(MyApp(initialScreen: initialScreen));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Widget initialScreen;
+  const MyApp({
+    super.key,
+    required this.initialScreen,
+  });
 
   // This widget is the root of your application.
   @override
@@ -47,7 +58,7 @@ class MyApp extends StatelessWidget {
 
       // 홈
 
-      home: const Guide(),
+      home: initialScreen,
     );
   }
 }

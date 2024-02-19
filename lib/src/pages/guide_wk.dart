@@ -1,11 +1,12 @@
 import 'package:capsule/src/pages/guide_content_screen_wk.dart';
-import 'package:capsule/src/pages/home_wk.dart';
 import 'package:capsule/src/pages/index_screen_wk.dart';
+import 'package:capsule/src/pages/mypage_screen_wk.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Guide extends StatefulWidget {
-  const Guide({super.key});
+  final bool isMyPaged;
+  const Guide({super.key, required this.isMyPaged});
 
   @override
   State<Guide> createState() => _GuideState();
@@ -18,14 +19,13 @@ class _GuideState extends State<Guide> {
   @override
   void initState() {
     super.initState();
-    // _checkIfFirstTime(); // 이미 실행한 적이 있는 경우, 가이드 페이지를 보여주지 않음
-    // 개발 완료되면 주석 해제
+    //_checkIfFirstTime(); // 이미 실행한 적이 있는 경우, 가이드 페이지를 보여주지 않음
   }
 
   void _checkIfFirstTime() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
-    if (!isFirstTime) {
+    if (!isFirstTime && widget.isMyPaged == false) {
       _navigateToNextScreen();
     }
   }
@@ -54,11 +54,15 @@ class _GuideState extends State<Guide> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).canvasColor,
         actions: [
-          IconButton(onPressed: _finishGuide, icon: const Icon(Icons.close))
-          // TextButton(
-          //   onPressed: _finishGuide,
-          //   child: const Text('건너뛰기', style: TextStyle(color: Colors.black)),
-          // )
+          IconButton(
+              onPressed: () {
+                if (widget.isMyPaged == true) {
+                  Navigator.pop(context);
+                } else {
+                  _finishGuide();
+                }
+              },
+              icon: const Icon(Icons.close))
         ],
       ),
       body: Column(

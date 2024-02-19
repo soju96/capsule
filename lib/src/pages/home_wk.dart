@@ -28,7 +28,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_selectedIndex],
-      floatingActionButton: const BaseFloatingButton(),
+      floatingActionButton:
+          _selectedIndex == 0 ? null : const BaseFloatingButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),

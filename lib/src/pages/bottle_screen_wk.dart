@@ -25,38 +25,35 @@ class BottleScreen extends StatelessWidget {
                 //   width: 70,
                 // ),
                 Image.asset(
-                  'assets/images/bottle.png',
+                  'assets/images/empty_uncap_bottle.png',
                   width: 300,
                 ),
-                const Column(
+                Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 70,
                     ),
-                    Text(
+                    const Text(
                       '당신의 첫 행복을 적금하세요.',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 18),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
-                    // Container(
-                    //   padding: const EdgeInsets.all(10),
-                    //   decoration: BoxDecoration(
-                    //     shape: BoxShape.circle,
-                    //     border: Border.all(
-                    //       color: Theme.of(context).primaryColor,
-                    //     ),
-                    //   ),
-                    //   child: IconButton(
-                    //     onPressed: () {},
-                    //     icon: const Icon(
-                    //       Icons.add,
-                    //       size: 50,
-                    //     ),
-                    //     color: Theme.of(context).primaryColor,
-                    //   ),
-                    // ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.black,
+                        ),
+                      ),
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Image.asset('assets/images/pen.png', width: 35),
+                      ),
+                    ),
                   ],
                 )
               ],

@@ -1,8 +1,6 @@
 import 'package:capsule/src/pages/guide_content_screen_wk.dart';
 import 'package:capsule/src/pages/index_screen_wk.dart';
-import 'package:capsule/src/pages/mypage_screen_wk.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Guide extends StatefulWidget {
   final bool isMyPaged;
@@ -19,33 +17,12 @@ class _GuideState extends State<Guide> {
   @override
   void initState() {
     super.initState();
-    //_checkIfFirstTime(); // 이미 실행한 적이 있는 경우, 가이드 페이지를 보여주지 않음
-  }
-
-  void _checkIfFirstTime() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
-    if (!isFirstTime && widget.isMyPaged == false) {
-      _navigateToNextScreen();
-    }
-  }
-
-  void _navigateToNextScreen() {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => const IndexScreen()),
-    );
   }
 
   void _onPageChanged(int page) {
     setState(() {
       _currentPage = page;
     });
-  }
-
-  void _finishGuide() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isFirstTime', false);
-    _navigateToNextScreen();
   }
 
   @override
@@ -59,7 +36,10 @@ class _GuideState extends State<Guide> {
                 if (widget.isMyPaged == true) {
                   Navigator.pop(context);
                 } else {
-                  _finishGuide();
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                        builder: (context) => const IndexScreen()),
+                  );
                 }
               },
               icon: const Icon(Icons.close))

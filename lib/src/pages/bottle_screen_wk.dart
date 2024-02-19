@@ -1,7 +1,7 @@
-import 'package:capsule/src/widgets/base_floating_button_wk.dart';
 import 'package:flutter/material.dart';
 
 class BottleScreen extends StatelessWidget {
+  final String name = '우규';
   const BottleScreen({super.key});
 
   @override
@@ -9,8 +9,8 @@ class BottleScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: const Text(
-          '님의 행복 저금통',
+        title: Text(
+          '$name의 행복 저금통',
         ),
       ),
       body: Center(
@@ -20,10 +20,6 @@ class BottleScreen extends StatelessWidget {
             Stack(
               alignment: Alignment.center,
               children: [
-                // Image.asset(
-                //   'assets/images/memo.png',
-                //   width: 70,
-                // ),
                 Image.asset(
                   'assets/images/empty_uncap_bottle.png',
                   width: 300,

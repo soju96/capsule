@@ -8,9 +8,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
-  Widget initialScreen = isFirstTime
-      ? const IndexScreen()
-      : const Guide(isMyPaged: false); // 테스트 후 앞뒤 바꾸기
+  Widget initialScreen =
+      isFirstTime ? const Guide(isMyPaged: false) : const IndexScreen();
   runApp(MyApp(initialScreen: initialScreen));
 }
 

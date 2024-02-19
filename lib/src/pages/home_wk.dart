@@ -36,17 +36,27 @@ class _HomeState extends State<Home> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            IconButton(
-              onPressed: () {
-                _onItemTapped(0);
-              },
-              icon: Image.asset('assets/images/clover.png'),
+            Opacity(
+              opacity: _selectedIndex == 0 ? 1.0 : 0.5,
+              child: IconButton(
+                onPressed: () {
+                  _onItemTapped(0);
+                },
+                icon: Image.asset(
+                  'assets/images/clover.png',
+                ),
+              ),
             ),
-            IconButton(
-              onPressed: () {
-                _onItemTapped(1);
-              },
-              icon: Image.asset('assets/logos/user.png'),
+            Opacity(
+              opacity: _selectedIndex == 1 ? 1.0 : 0.5,
+              child: IconButton(
+                onPressed: () {
+                  _onItemTapped(1);
+                },
+                icon: Image.asset(
+                  'assets/logos/user.png',
+                ),
+              ),
             ),
           ],
         ),

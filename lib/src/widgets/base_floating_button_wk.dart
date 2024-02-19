@@ -11,6 +11,7 @@ class BaseFloatingButton extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       onPressed: () {},
+      heroTag: "actionButton",
       child: Image.asset(
         'assets/images/pen.png',
         width: 30,

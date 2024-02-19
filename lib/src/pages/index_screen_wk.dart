@@ -47,7 +47,7 @@ class IndexScreen extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const SignUpScreen()));
+                      MaterialPageRoute(builder: (_) => SignUpScreen()));
                 },
                 child: Text(
                   '회원가입',

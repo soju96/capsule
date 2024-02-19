@@ -1,3 +1,4 @@
+import 'package:capsule/src/pages/home_wk.dart';
 import 'package:flutter/material.dart';
 
 class IndexScreen extends StatelessWidget {
@@ -31,7 +32,13 @@ class IndexScreen extends StatelessWidget {
                 height: 100,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Home(),
+                      ));
+                },
                 child: Text(
                   '로그인',
                   style: TextStyle(

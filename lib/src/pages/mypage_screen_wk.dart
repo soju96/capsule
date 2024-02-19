@@ -49,11 +49,32 @@ class MyPageScreen extends StatelessWidget {
               name: '로그아웃',
               action: IconButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const IndexScreen(),
-                      ));
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text('로그아웃'),
+                        content: const Text('정말 로그아웃 하시겠습니까?'),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const IndexScreen(),
+                                    ));
+                              },
+                              child: const Text('확인')),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('취소'))
+                        ],
+                      );
+                    },
+                  );
                 },
                 icon: const Icon(Icons.arrow_forward_ios),
               ),

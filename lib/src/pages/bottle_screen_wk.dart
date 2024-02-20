@@ -1,8 +1,9 @@
+import 'package:capsule/src/pages/notification_screen_wk.dart';
 import 'package:capsule/src/pages/memo_screen_sj.dart';
 import 'package:flutter/material.dart';
 
 class BottleScreen extends StatelessWidget {
-  final String name = '우규';
+  final String name = 'name';
   const BottleScreen({super.key});
 
   @override
@@ -10,9 +11,23 @@ class BottleScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
+        foregroundColor: Colors.white,
         title: Text(
           '$name의 행복 저금통',
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const NotificationScreen(),
+                    ));
+              },
+              icon: const Icon(
+                Icons.notifications_outlined,
+              ))
+        ],
       ),
       body: Center(
         child: Column(

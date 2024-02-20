@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class MemoInput extends StatefulWidget {
   const MemoInput({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class MemoInput extends StatefulWidget {
 class _MemoInputState extends State<MemoInput> {
   final TextEditingController _keywordController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
+
   bool _isSaving = false; // 저장 중인지 여부를 나타내는 상태 변수
   File? _image; // 선택한 이미지 파일
 
@@ -29,6 +31,33 @@ class _MemoInputState extends State<MemoInput> {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     setState(() {
       _image = image != null ? File(image.path) : null;
+    });
+  }
+
+  Future<void> _saveMemo() async {
+    setState(() {
+      _isSaving = true; // 저장 중 상태로 변경
+    });
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('memo', _contentController.text); // 메모 내용 저장
+    await prefs.setString('keyword', _keywordController.text); // 키워드 저장
+    if (_image != null) {
+      // 이미지가 있을 경우 이미지 파일을 저장
+      const String imagePath =
+          '/gs://happybottle-13b47.appspot.com/memory'; // 이미지를 저장할 경로
+      await _image!.copy(imagePath);
+      await prefs.setString('imagePath', imagePath); // 이미지 경로 저장
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('저장되었습니다'),
+      ),
+    );
+
+    setState(() {
+      _isSaving = false; // 저장 완료 후 상태 변경
     });
   }
 
@@ -53,28 +82,7 @@ class _MemoInputState extends State<MemoInput> {
             TextButton(
               onPressed: _isSaving // 저장 중일 때는 비활성화
                   ? null
-                  : () async {
-                      setState(() {
-                        _isSaving = true; // 저장 중 상태로 변경
-                      });
-
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      await prefs.setString(
-                          'memo', _contentController.text); // 메모 내용 저장
-                      await prefs.setString(
-                          'keyword', _keywordController.text); // 키워드 저장
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('저장되었습니다'),
-                        ),
-                      );
-
-                      setState(() {
-                        _isSaving = false; // 저장 완료 후 상태 변경
-                      });
-                    },
+                  : _saveMemo, // 저장 함수 호출
               child: Text(
                 _isSaving ? '완료' : '저장', // 저장 중일 때는 '완료', 그렇지 않으면 '저장'으로 표시
                 style: const TextStyle(color: Colors.white),
@@ -133,9 +141,14 @@ class _MemoInputState extends State<MemoInput> {
                     maxLines: null,
                   ),
                   const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: _getImage,
-                    child: const Text('이미지 넣기'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: _getImage,
+                        child: const Text('이미지 넣기'),
+                      ),
+                    ],
                   ),
                 ],
               ),

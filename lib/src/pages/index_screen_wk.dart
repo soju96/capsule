@@ -1,6 +1,5 @@
 import 'package:capsule/src/pages/login_screen_kl.dart';
 import 'package:capsule/src/pages/sign_up_screen_kl.dart';
-import 'package:capsule/src/pages/home_wk.dart';
 import 'package:flutter/material.dart';
 
 class IndexScreen extends StatelessWidget {

@@ -1,3 +1,4 @@
+import 'package:capsule/src/pages/memo_screen_sj.dart';
 import 'package:flutter/material.dart';
 
 class BottleScreen extends StatelessWidget {
@@ -46,7 +47,13 @@ class BottleScreen extends StatelessWidget {
                         ),
                       ),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const MemoInput(),
+                            ),
+                          );
+                        },
                         icon: Image.asset('assets/images/pen.png', width: 35),
                       ),
                     ),

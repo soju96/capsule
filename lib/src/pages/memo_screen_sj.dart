@@ -42,6 +42,7 @@ class _MemoInputState extends State<MemoInput> {
       child: Scaffold(
         backgroundColor: Colors.white, // 전체 배경색을 흰색으로 설정
         appBar: AppBar(
+          foregroundColor: Colors.white,
           backgroundColor: Theme.of(context).primaryColor,
           title: const Text(
             '쪽지1',

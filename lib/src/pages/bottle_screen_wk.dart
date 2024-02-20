@@ -1,7 +1,7 @@
-import 'package:capsule/src/widgets/base_floating_button_wk.dart';
 import 'package:flutter/material.dart';
 
 class BottleScreen extends StatelessWidget {
+  final String name = '우규';
   const BottleScreen({super.key});
 
   @override
@@ -9,8 +9,8 @@ class BottleScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: const Text(
-          '님의 행복 저금통',
+        title: Text(
+          '$name의 행복 저금통',
         ),
       ),
       body: Center(
@@ -20,43 +20,36 @@ class BottleScreen extends StatelessWidget {
             Stack(
               alignment: Alignment.center,
               children: [
-                // Image.asset(
-                //   'assets/images/memo.png',
-                //   width: 70,
-                // ),
                 Image.asset(
-                  'assets/images/bottle.png',
+                  'assets/images/empty_uncap_bottle.png',
                   width: 300,
                 ),
-                const Column(
+                Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 70,
                     ),
-                    Text(
+                    const Text(
                       '당신의 첫 행복을 적금하세요.',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 18),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
-                    // Container(
-                    //   padding: const EdgeInsets.all(10),
-                    //   decoration: BoxDecoration(
-                    //     shape: BoxShape.circle,
-                    //     border: Border.all(
-                    //       color: Theme.of(context).primaryColor,
-                    //     ),
-                    //   ),
-                    //   child: IconButton(
-                    //     onPressed: () {},
-                    //     icon: const Icon(
-                    //       Icons.add,
-                    //       size: 50,
-                    //     ),
-                    //     color: Theme.of(context).primaryColor,
-                    //   ),
-                    // ),
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.black,
+                        ),
+                      ),
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Image.asset('assets/images/pen.png', width: 35),
+                      ),
+                    ),
                   ],
                 )
               ],

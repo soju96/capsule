@@ -1,3 +1,5 @@
+import 'package:capsule/src/pages/login_screen_kl.dart';
+import 'package:capsule/src/pages/sign_up_screen_kl.dart';
 import 'package:capsule/src/pages/home_wk.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +23,7 @@ class IndexScreen extends StatelessWidget {
                 height: 20,
               ),
               const Text(
-                '오늘의 행복을 오래동안',
+                '오늘의 행복을 오랫동안',
                 style: TextStyle(fontSize: 30),
               ),
               const Text(
@@ -33,11 +35,8 @@ class IndexScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Home(),
-                      ));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (_) => const LogInScreen()));
                 },
                 child: Text(
                   '로그인',
@@ -46,7 +45,10 @@ class IndexScreen extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (_) => const SignUpScreen()));
+                },
                 child: Text(
                   '회원가입',
                   style: TextStyle(

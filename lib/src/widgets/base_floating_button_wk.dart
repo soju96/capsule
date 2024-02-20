@@ -1,3 +1,4 @@
+import 'package:capsule/src/pages/memo_screen_sj.dart';
 import 'package:flutter/material.dart';
 
 class BaseFloatingButton extends StatelessWidget {
@@ -10,7 +11,14 @@ class BaseFloatingButton extends StatelessWidget {
         side: BorderSide(style: BorderStyle.solid),
       ),
       backgroundColor: Colors.white,
-      onPressed: () {},
+      onPressed: () {
+        // IconButton을 누를 때 MemoInput 위젯으로 화면을 전환합니다.
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const MemoInput(),
+          ),
+        );
+      },
       heroTag: "actionButton",
       child: Image.asset(
         'assets/images/pen.png',

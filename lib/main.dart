@@ -5,12 +5,20 @@ import 'package:capsule/src/pages/index_screen_wk.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+import 'src/controller/notification_controller_wk.dart';
 
 void main() async {
+  // 파이어베이스 초기화 세팅
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
+  // notification 설정
+  String? firebaseToken = await notificationSetting();
+
+  // 알림 권한 요청
+  await FirebaseMessaging.instance.requestPermission();
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
   Widget initialScreen =

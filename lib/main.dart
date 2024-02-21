@@ -1,11 +1,16 @@
+import 'package:capsule/firebase_options.dart';
 import 'package:capsule/src/pages/guide_wk.dart';
 import 'package:capsule/src/pages/index_screen_wk.dart';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
   Widget initialScreen =

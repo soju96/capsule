@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:capsule/src/pages/login_screen_kl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,6 +12,60 @@ class SignUpScreen extends StatelessWidget {
   final pwController = TextEditingController();
   final emailController = TextEditingController();
   final nicknameController = TextEditingController();
+
+  Future<void> signUpRequest(
+      context, String id, String pw, String email, String nickname) async {
+    var apiUrl = Uri.parse(
+        'http://your-api-endpoint/happy-capsule/join'); // 실제 API 엔드포인트로 대체해야 합니다.
+
+    try {
+      var response = await http.post(
+        apiUrl,
+        body: {
+          'id': id,
+          'pw': pw,
+          'email': email,
+          'nickname': nickname,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        // 서버 응답 확인
+        Map<String, dynamic> responseData = jsonDecode(response.body);
+        bool success = responseData['success'];
+        String message = responseData['message'];
+
+        if (success) {
+          // 회원가입 성공
+          // 로그인 화면으로 이동
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const LogInScreen()),
+          );
+        } else {
+          // 회원가입 실패
+          // 오류 메시지 표시
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(message),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      } else {
+        // 서버 요청 실패
+        // 에러 처리
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('서버 요청 실패'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } catch (e) {
+      print('회원가입 과정에서 오류 발생: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +152,7 @@ class SignUpScreen extends StatelessWidget {
                   // 'Sign Up' 버튼이 눌렸을 때 회원가입 요청 보내기
                   // 입력값을 추출하여 signUpRequest() 함수에 전달
                   signUpRequest(
+                    context,
                     idController.text,
                     pwController.text,
                     emailController.text,
@@ -114,33 +172,5 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-Future<void> signUpRequest(
-    String id, String pw, String email, String nickname) async {
-  var apiUrl =
-      Uri.parse('http://your-api-endpoint/signup'); // 실제 API 엔드포인트로 대체해야 합니다.
-
-  try {
-    var response = await http.post(
-      apiUrl,
-      body: {
-        'id': id,
-        'pw': pw,
-        'email': email,
-        'nickname': nickname,
-      },
-    );
-
-    if (response.statusCode == 200) {
-      // 성공적으로 회원가입 처리됨
-      print('회원가입 성공');
-    } else {
-      // 회원가입에 실패한 경우
-      print('회원가입 실패: ${response.statusCode}');
-    }
-  } catch (e) {
-    print('회원가입 과정에서 오류 발생: $e');
   }
 }

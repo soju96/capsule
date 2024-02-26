@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 const String springBootUrl =
-    'https://your-api-url'; // 여기에 Spring Boot 서버의 URL을 넣으세요.
+    'http://your-api-endpoint/happy-capsule/find'; // 여기에 Spring Boot 서버의 URL을 넣으세요.
 final TextEditingController emailController = TextEditingController();
 
 class SearchAccountScreen extends StatelessWidget {
   const SearchAccountScreen({super.key});
 
-  Future<void> searchAccount(String email) async {
+  Future<void> searchAccount(context, String email) async {
     try {
       final response = await http.post(
         Uri.parse('$springBootUrl/api/search_account'),
@@ -24,11 +24,38 @@ class SearchAccountScreen extends StatelessWidget {
       );
 
       if (response.statusCode == 200) {
-        // 요청이 성공했을 때
-        // 결과를 처리하는 로직을 추가하세요.
+        // 서버 응답 확인
+        Map<String, dynamic> responseData = jsonDecode(response.body);
+        bool success = responseData['success'];
+        String message = responseData['message'];
+
+        if (success) {
+          // 계정 검색 성공
+          // 계정 결과 화면으로 이동
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ResultAccountScreen()),
+          );
+        } else {
+          // 계정검색 실패
+          // 오류 메시지 표시
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(message),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
       } else {
-        // 요청이 실패했을 때
-        // 실패 처리를 추가하세요.
+        // 서버 요청 실패
+        // 에러 처리
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('서버 요청 실패'),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     } catch (e) {
       // 네트워크 오류 등 예외 처리
@@ -75,12 +102,7 @@ class SearchAccountScreen extends StatelessWidget {
                 onPressed: () {
                   String email =
                       emailController.text; // TextFormField에서 입력된 이메일 값
-                  searchAccount(email);
-
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => const ResultAccountScreen()));
+                  searchAccount(context, email);
                 },
                 child: Text(
                   '아이디 / 비밀번호 찾기',

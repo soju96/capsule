@@ -19,7 +19,8 @@ class ResultAccountScreenState extends State<ResultAccountScreen> {
 
   // API 요청 함수
   Future<void> fetchData() async {
-    final response = await http.get(Uri.parse('YOUR_API_URL_HERE'));
+    final response = await http
+        .get(Uri.parse('http://your-api-endpoint/happy-capsule/find'));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);

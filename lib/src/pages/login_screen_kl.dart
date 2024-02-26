@@ -1,10 +1,11 @@
 import 'dart:convert';
+import 'package:capsule/src/pages/bottle_screen_wk.dart';
 import 'package:capsule/src/pages/search_account_screen_kl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 // 로그인 API 엔드포인트 URL
-const String loginUrl = 'https://your-api-url/login';
+const String loginUrl = 'http://your-api-endpoint/happy-capsule/login';
 final TextEditingController idController = TextEditingController();
 final TextEditingController pwController = TextEditingController();
 
@@ -12,7 +13,7 @@ class LogInScreen extends StatelessWidget {
   const LogInScreen({super.key});
 
   // 아이디와 비밀번호를 가지고 로그인 요청을 보내는 함수
-  Future<void> loginRequest(String id, String pw) async {
+  Future<void> loginRequest(context, String id, String pw) async {
     try {
       final response = await http.post(
         Uri.parse(loginUrl),
@@ -26,11 +27,37 @@ class LogInScreen extends StatelessWidget {
       );
 
       if (response.statusCode == 200) {
-        // 로그인 성공
-        // 여기서 적절한 처리를 수행하세요.
+        // 서버 응답 확인
+        Map<String, dynamic> responseData = jsonDecode(response.body);
+        bool success = responseData['success'];
+        String message = responseData['message'];
+
+        if (success) {
+          // 로그인 성공
+          // 메인 화면으로 이동
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const BottleScreen()),
+          );
+        } else {
+          // 로그인 실패
+          // 오류 메시지 표시
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(message),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
       } else {
-        // 로그인 실패
-        // 여기서 적절한 에러 처리를 수행하세요.
+        // 서버 요청 실패
+        // 에러 처리
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('서버 요청 실패'),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     } catch (e) {
       // 네트워크 오류 등 예외 처리
@@ -93,7 +120,7 @@ class LogInScreen extends StatelessWidget {
                   String pw = pwController.text; // 비밀번호 값 가져오기
                   print(id);
                   print(pw);
-                  loginRequest(id, pw); // 로그인 요청 보내기
+                  loginRequest(context, id, pw); // 로그인 요청 보내기
                   // Navigator.pushReplacement(
                   //     context,
                   //     MaterialPageRoute(

@@ -41,9 +41,45 @@ class _NotificationSettingScreenState extends State<NotificationSettingScreen> {
                       _isChecked = value;
                     });
                   },
-                )
+                ),
               ],
-            )
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  '쪽지 작성 알림',
+                  style: TextStyle(fontSize: 18),
+                ),
+                CupertinoSwitch(
+                  activeColor: Theme.of(context).primaryColor,
+                  value: _isChecked,
+                  onChanged: (value) {
+                    setState(() {
+                      _isChecked = value;
+                    });
+                  },
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  '랜덤 쪽지 알림',
+                  style: TextStyle(fontSize: 18),
+                ),
+                CupertinoSwitch(
+                  activeColor: Theme.of(context).primaryColor,
+                  value: _isChecked,
+                  onChanged: (value) {
+                    setState(() {
+                      _isChecked = value;
+                    });
+                  },
+                ),
+              ],
+            ),
           ],
         ),
       ),

@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAiEhRCEt9n2BXlIuApkuvNSueR8TlL1Ro',
-    appId: '1:403081371830:android:f42614a4d84be3f77a0617',
-    messagingSenderId: '403081371830',
-    projectId: 'flutter-chat-app-ac242',
-    storageBucket: 'flutter-chat-app-ac242.appspot.com',
+    apiKey: 'AIzaSyAi-wSj7bo8lu2F56JDHy5HVUIE8nOumc8',
+    appId: '1:273857384240:android:d42353d16f3979f17142f5',
+    messagingSenderId: '273857384240',
+    projectId: 'happybottleapp',
+    storageBucket: 'happybottleapp.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA89alADCW61CpaC04W3FUgQZbea_OMGhQ',
-    appId: '1:403081371830:ios:6e3390283bb539777a0617',
-    messagingSenderId: '403081371830',
-    projectId: 'flutter-chat-app-ac242',
-    storageBucket: 'flutter-chat-app-ac242.appspot.com',
+    apiKey: 'AIzaSyAzhbvcjShPakJeeAn-Fu2-C37hpKC0eNU',
+    appId: '1:273857384240:ios:4efc1652992eeaeb7142f5',
+    messagingSenderId: '273857384240',
+    projectId: 'happybottleapp',
+    storageBucket: 'happybottleapp.appspot.com',
     iosBundleId: 'com.example.capsule',
   );
 }

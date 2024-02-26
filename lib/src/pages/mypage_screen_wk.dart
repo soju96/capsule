@@ -4,8 +4,8 @@ import 'package:capsule/src/widgets/my_page_row_menu_wk.dart';
 import 'package:flutter/material.dart';
 
 class MyPageScreen extends StatelessWidget {
-  final String name = 'wk';
-  final String email = 'liberty1436@gamil.com';
+  final String name = 'name';
+  final String email = 'email';
   const MyPageScreen({super.key});
 
   @override

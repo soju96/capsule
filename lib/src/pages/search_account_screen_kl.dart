@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:capsule/src/pages/Result_account_screen_kl.dart';
+import 'package:capsule/src/pages/result_account_screen_kl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

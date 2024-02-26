@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:273857384240:android:d42353d16f3979f17142f5",
+        "android_client_info": {
+          "package_name": "com.example.capsule"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi-wSj7bo8lu2F56JDHy5HVUIE8nOumc8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:273857384240:android:91622f85361e548a7142f5",
         "android_client_info": {
           "package_name": "com.wk.happybottleapp"

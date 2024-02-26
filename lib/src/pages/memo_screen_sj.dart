@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:uuid/uuid.dart';
 
 class MemoInput extends StatefulWidget {
   const MemoInput({Key? key}) : super(key: key);
@@ -41,17 +43,32 @@ class _MemoInputState extends State<MemoInput> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('memo', _contentController.text); // 메모 내용 저장
     await prefs.setString('keyword', _keywordController.text); // 키워드 저장
+
     if (_image != null) {
-      // 이미지가 있을 경우 이미지 파일을 저장
-      const String imagePath =
-          '/gs://happybottle-13b47.appspot.com/memory'; // 이미지를 저장할 경로
-      await _image!.copy(imagePath);
-      await prefs.setString('imagePath', imagePath); // 이미지 경로 저장
+      // 파일 이름 생성
+      String originName = _image!.path.split('/').last;
+      String uuid = const Uuid().v4();
+      String shortUuid = uuid.split('-')[0]; // '-'로 나눈 후 첫 번째 부분만 사용
+      String saveName =
+          '$shortUuid${originName.substring(originName.lastIndexOf("."))}';
+
+      // Firebase Storage에 이미지 업로드
+      Reference storage = FirebaseStorage.instanceFor(
+              bucket: "gs://happybottle-13b47.appspot.com")
+          .ref()
+          .child('memory/$saveName');
+      UploadTask uploadTask =
+          storage.putFile(_image!, SettableMetadata(contentType: 'image/jpeg'));
+      await uploadTask.whenComplete(() => null);
+
+      // 업로드된 이미지의 다운로드 URL 가져오기
+      // String imageUrl = await storageReference.getDownloadURL();
+      // await prefs.setString('imageUrl', imageUrl); // 이미지 URL 저장
     }
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('저장되었습니다'),
+        content: Text('저장완료'),
       ),
     );
 

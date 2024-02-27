@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 const String springBootUrl =
-    'http://your-api-endpoint/happy-capsule/find'; // 여기에 Spring Boot 서버의 URL을 넣으세요.
+    'http://10.0.2.2/happy-capsule/find'; // 여기에 Spring Boot 서버의 URL을 넣으세요.
 final TextEditingController emailController = TextEditingController();
 
 class SearchAccountScreen extends StatelessWidget {
@@ -16,7 +16,7 @@ class SearchAccountScreen extends StatelessWidget {
       final response = await http.post(
         Uri.parse('$springBootUrl/api/search_account'),
         body: jsonEncode(<String, String>{
-          'email': email,
+          'u_email': email,
         }),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',

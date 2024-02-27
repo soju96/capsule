@@ -19,15 +19,15 @@ class ResultAccountScreenState extends State<ResultAccountScreen> {
 
   // API 요청 함수
   Future<void> fetchData() async {
-    final response = await http
-        .get(Uri.parse('http://your-api-endpoint/happy-capsule/find'));
+    final response =
+        await http.get(Uri.parse('http://10.0.2.2/happy-capsule/find'));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       setState(() {
-        email = data['email'];
-        id = data['id'];
-        password = data['password'];
+        email = data['u_email'];
+        id = data['u_id'];
+        password = data['u_pw'];
         nickname = data['nickname'];
       });
     } else {

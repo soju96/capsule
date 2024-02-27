@@ -16,15 +16,15 @@ class SignUpScreen extends StatelessWidget {
   Future<void> signUpRequest(
       context, String id, String pw, String email, String nickname) async {
     var apiUrl = Uri.parse(
-        'http://your-api-endpoint/happy-capsule/join'); // 실제 API 엔드포인트로 대체해야 합니다.
+        'http://10.0.2.2/happy-capsule/join'); // 실제 API 엔드포인트로 대체해야 합니다.
 
     try {
       var response = await http.post(
         apiUrl,
         body: {
-          'id': id,
-          'pw': pw,
-          'email': email,
+          'u_id': id,
+          'u_pw': pw,
+          'u_email': email,
           'nickname': nickname,
         },
       );

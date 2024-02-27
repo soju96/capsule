@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 // 로그인 API 엔드포인트 URL
-const String loginUrl = 'http://your-api-endpoint/happy-capsule/login';
+const String loginUrl = 'http://10.0.2.2/happy-capsule/login';
 final TextEditingController idController = TextEditingController();
 final TextEditingController pwController = TextEditingController();
 
@@ -16,23 +16,25 @@ class LogInScreen extends StatelessWidget {
   Future<void> loginRequest(context, String id, String pw) async {
     try {
       final response = await http.post(
-        Uri.parse(loginUrl),
-        body: jsonEncode(<String, String>{
-          'id': id,
-          'pw': pw,
-        }),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
+        Uri.parse('$loginUrl?u_id=$id&u_pw=$pw'),
+        // body: jsonEncode(<String, String>{
+        //   'u_id': id,
+        //   'u_pw': pw,
+        // }),
+        // headers: <String, String>{
+        //   'Content-Type': 'application/json; charset=UTF-8',
+        // },
       );
+
+      print(response.body.toString());
 
       if (response.statusCode == 200) {
         // 서버 응답 확인
-        Map<String, dynamic> responseData = jsonDecode(response.body);
-        bool success = responseData['success'];
-        String message = responseData['message'];
+        // Map<String, dynamic> responseData = jsonDecode(response.body);
+        // bool success = responseData['success'];
+        // String message = responseData['message'];
 
-        if (success) {
+        if (response.body.toString() == '1') {
           // 로그인 성공
           // 메인 화면으로 이동
           Navigator.pushReplacement(
@@ -43,8 +45,8 @@ class LogInScreen extends StatelessWidget {
           // 로그인 실패
           // 오류 메시지 표시
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(message),
+            const SnackBar(
+              content: Text("2222"),
               backgroundColor: Colors.red,
             ),
           );

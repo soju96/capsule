@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'package:capsule/src/pages/memo_view_page_sj.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart';
+import 'package:http/http.dart' as http;
 
 class MemoInput extends StatefulWidget {
   const MemoInput({Key? key}) : super(key: key);
@@ -35,6 +37,40 @@ class _MemoInputState extends State<MemoInput> {
     });
   }
 
+  Future<void> _saveMemoAndNavigate() async {
+    bool shouldSave = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('쪽지 등록'),
+          content: const Text('쪽지가 병안으로 들어갑니다. 병안에 들어간 쪽지는 수정 할 수 없습니다.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true); // 저장 확인
+              },
+              child: const Text('예'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false); // 저장 취소
+              },
+              child: const Text('아니오'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (shouldSave == true) {
+      await _saveMemo(); // 메모 저장
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => MemoViewPage()), // 입력한 내용을 보여주는 페이지로 이동
+      // );
+    }
+  }
+
   Future<void> _saveMemo() async {
     setState(() {
       _isSaving = true; // 저장 중 상태로 변경
@@ -44,19 +80,18 @@ class _MemoInputState extends State<MemoInput> {
     await prefs.setString('memo', _contentController.text); // 메모 내용 저장
     await prefs.setString('keyword', _keywordController.text); // 키워드 저장
 
+    String? imageUuid; // 이미지 UUID 초기화
+
     if (_image != null) {
       // 파일 이름 생성
       String originName = _image!.path.split('/').last;
-      String uuid = const Uuid().v4();
-      String shortUuid = uuid.split('-')[0]; // '-'로 나눈 후 첫 번째 부분만 사용
-      String saveName =
-          '$shortUuid${originName.substring(originName.lastIndexOf("."))}';
+      String imageUuid = const Uuid().v4().split('-')[0];
 
       // Firebase Storage에 이미지 업로드
       Reference storage = FirebaseStorage.instanceFor(
               bucket: "gs://happybottle-13b47.appspot.com")
           .ref()
-          .child('memory/$saveName');
+          .child('memory/$imageUuid');
       UploadTask uploadTask =
           storage.putFile(_image!, SettableMetadata(contentType: 'image/jpeg'));
       await uploadTask.whenComplete(() => null);
@@ -65,6 +100,16 @@ class _MemoInputState extends State<MemoInput> {
       // String imageUrl = await storageReference.getDownloadURL();
       // await prefs.setString('imageUrl', imageUrl); // 이미지 URL 저장
     }
+
+    // Oracle DB에 저장하기 위해 spring boot로 보내기
+    // final response = await http.post(
+    //   Uri.parse('https://your-spring-boot-api-url/memos'), // 스프링 부트 주소 넣기
+    //   body: {
+    //     'keyword': _keywordController.text,
+    //     'content': _contentController.text,
+    //     'imageUuid': imageUuid ?? '', // 이미지 UUID 또는 빈 문자열 전송
+    //   },
+    // ); // 일단 이 걸로 spring boot로 보내고 그 다음에
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -75,6 +120,17 @@ class _MemoInputState extends State<MemoInput> {
     setState(() {
       _isSaving = false; // 저장 완료 후 상태 변경
     });
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MemoViewPage(
+          keyword: _keywordController.text,
+          content: _contentController.text,
+          imageUrl: '$imageUuid', // 이미지 URL을 추가해야 함
+        ),
+      ),
+    );
   }
 
   @override
@@ -98,9 +154,9 @@ class _MemoInputState extends State<MemoInput> {
             TextButton(
               onPressed: _isSaving // 저장 중일 때는 비활성화
                   ? null
-                  : _saveMemo, // 저장 함수 호출
+                  : _saveMemoAndNavigate, // 저장 함수 호출
               child: Text(
-                _isSaving ? '완료' : '저장', // 저장 중일 때는 '완료', 그렇지 않으면 '저장'으로 표시
+                _isSaving ? '저장중' : '저장', // 저장 중일 때는 '저장중', 그렇지 않으면 '저장'으로 표시
                 style: const TextStyle(color: Colors.white),
               ),
             ),
@@ -124,7 +180,7 @@ class _MemoInputState extends State<MemoInput> {
                   TextFormField(
                     controller: _keywordController,
                     textAlign: TextAlign.center, // 가운데 정렬
-                    maxLength: 100, // 최대 글자수 100자 제한
+                    maxLength: 35, // 최대 글자수 35자 제한
                     decoration: const InputDecoration(
                       hintText: '제목을 입력하세요',
                       alignLabelWithHint: true, // 가운데 정렬

@@ -21,7 +21,7 @@ class BottleScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => NotificationScreen(),
+                      builder: (context) => const NotificationScreen(),
                     ));
               },
               icon: const Icon(

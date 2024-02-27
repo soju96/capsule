@@ -1,5 +1,6 @@
 import 'package:capsule/src/pages/guide_content_screen_wk.dart';
 import 'package:capsule/src/pages/index_screen_wk.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 class Guide extends StatefulWidget {
@@ -13,11 +14,6 @@ class Guide extends StatefulWidget {
 class _GuideState extends State<Guide> {
   final PageController _controller = PageController(initialPage: 0);
   int _currentPage = 0;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   void _onPageChanged(int page) {
     setState(() {

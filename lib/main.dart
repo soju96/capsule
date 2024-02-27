@@ -1,11 +1,35 @@
+import 'package:capsule/firebase_options.dart';
+import 'package:capsule/src/controller/firebase_notification_handler.dart';
 import 'package:capsule/src/pages/guide_wk.dart';
 import 'package:capsule/src/pages/index_screen_wk.dart';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  FirebaseNotificationHandler().saveDeviceToken();
+  FirebaseNotificationHandler().requestNotificationPermissions();
+  //FirebaseNotificationHandler().initialize();
+  FirebaseNotificationHandler().setUpFirebase();
+  //FirebaseNotificationHandler().notificationSetting();
+
+  // 알림 토큰 저장
+  // SharedPreferences prefsToken = await SharedPreferences.getInstance();
+  // await prefsToken.setString('firebaseToken', firebaseToken ?? '');
+
+  // 토큰 가져오는 법
+  // SharedPreferences prefsToken = await SharedPreferences.getInstance();
+  // String? firebaseToken = prefsToken.getString('firebaseToken');
+
+  // notification 설정
+  // String? firebaseToken = await notificationSetting();
+  // await notificationSetting();
+
+  // 앱 최초 실행인지 여부 저장 (가이드 스크린)
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
   Widget initialScreen =
@@ -23,8 +47,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // This trailing comma makes auto-formatting nicer for build methods.
-
     return MaterialApp(
       theme: ThemeData(
         // 위에 컬러

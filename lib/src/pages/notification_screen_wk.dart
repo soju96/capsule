@@ -1,14 +1,39 @@
+import 'package:capsule/src/models/notification_model.dart';
 import 'package:capsule/src/pages/notification_setting_screen_wk.dart';
+import 'package:capsule/src/services/notification_service.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class NotificationScreen extends StatelessWidget {
+class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
 
   @override
+  State<NotificationScreen> createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends State<NotificationScreen> {
+  final NotificationService notificationService = NotificationService();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      if (notification != null) {
+        notificationService.addFirebaseNotification(notification);
+        setState(() {});
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    String currentTime =
-        DateFormat('yyyy. MM. dd. HH:mm aaa').format(DateTime.now());
+    List<NotificationModel> notifications =
+        notificationService.getNotifications();
+
+    notifications.sort((a, b) => b.time.compareTo(a.time));
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).canvasColor,
@@ -20,10 +45,11 @@ class NotificationScreen extends StatelessWidget {
           IconButton(
             onPressed: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const NotificationSettingScreen(),
-                  ));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificationSettingScreen(),
+                ),
+              );
             },
             icon: const Icon(Icons.settings_outlined),
           )
@@ -31,58 +57,37 @@ class NotificationScreen extends StatelessWidget {
       ),
       body: Container(
         padding: const EdgeInsets.all(8),
-        child: ListView(children: [
-          ListTile(
-            leading: Image.asset(
-              'assets/images/memo.png',
-              width: 50,
-            ),
-            title: const Text(
-              '정기 알람',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView.builder(
+          itemCount: notifications.length,
+          itemBuilder: (context, index) {
+            NotificationModel notification = notifications[index];
+            String currentTime =
+                DateFormat('yyyy. MM. dd. HH:mm aaa').format(notification.time);
+
+            return Column(
               children: [
-                const Text('당신의 행복을 적어주세요.'),
-                Text(currentTime),
+                ListTile(
+                  leading: Image.asset(
+                    'assets/images/memo.png',
+                    width: 50,
+                  ),
+                  title: Text(
+                    notification.title,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(notification.description),
+                      Text(currentTime),
+                    ],
+                  ),
+                ),
+                const Divider(color: Colors.black),
               ],
-            ),
-          ),
-          const Divider(color: Colors.black),
-          ListTile(
-            leading: Image.asset('assets/images/bottle_20.png', width: 50),
-            title: const Text(
-              '유리병2이 가득찼습니다.',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('유리병을 열어주세요.'),
-                Text(currentTime),
-              ],
-            ),
-          ),
-          const Divider(color: Colors.black),
-          ListTile(
-            leading: Image.asset(
-              'assets/images/bottle_20.png',
-              width: 50,
-            ),
-            title: const Text(
-              '유리병1이 가득찼습니다.',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('유리병을 열어주세요.'),
-                Text(currentTime),
-              ],
-            ),
-          ),
-        ]),
+            );
+          },
+        ),
       ),
     );
   }

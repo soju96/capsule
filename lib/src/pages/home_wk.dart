@@ -1,6 +1,7 @@
 import 'package:capsule/src/pages/bottle_screen_wk.dart';
+import 'package:capsule/src/pages/shelf_list_hj.dart';
 import 'package:capsule/src/pages/mypage_screen_wk.dart';
-import 'package:capsule/src/pages/shelflist_screen_hj.dart';
+
 import 'package:capsule/src/widgets/base_floating_button_wk.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,7 +19,7 @@ class _HomeState extends State<Home> {
   final List<Widget> _pages = [
     const BottleScreen(),
     const MyPageScreen(),
-    const ShelfListScreen(),
+    const JsonParse()
   ];
 
   @override

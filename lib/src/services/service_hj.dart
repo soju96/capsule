@@ -7,7 +7,7 @@ class Services {
 
   static Future<List<CapsuleList>> getInfo() async {
     try {
-      final response = await http.post(Uri.parse(url));
+      final response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {
         final List<CapsuleList> capsulelist =

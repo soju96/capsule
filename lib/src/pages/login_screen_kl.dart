@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:capsule/src/pages/bottle_screen_wk.dart';
 import 'package:capsule/src/pages/search_account_screen_kl.dart';
 import 'package:flutter/material.dart';
+import 'package:capsule/src/pages/shelf_list_hj.dart';
 import 'package:http/http.dart' as http;
 
 // 로그인 API 엔드포인트 URL
@@ -39,7 +40,7 @@ class LogInScreen extends StatelessWidget {
           // 메인 화면으로 이동
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const BottleScreen()),
+            MaterialPageRoute(builder: (context) => const JsonParse()),
           );
         } else {
           // 로그인 실패

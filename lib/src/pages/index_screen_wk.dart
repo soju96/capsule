@@ -1,9 +1,27 @@
 import 'package:capsule/src/pages/login_screen_kl.dart';
 import 'package:capsule/src/pages/sign_up_screen_kl.dart';
+import 'package:capsule/src/widgets/animated_memo.dart';
 import 'package:flutter/material.dart';
 
-class IndexScreen extends StatelessWidget {
+class IndexScreen extends StatefulWidget {
   const IndexScreen({super.key});
+
+  @override
+  State<IndexScreen> createState() => _IndexScreenState();
+}
+
+class _IndexScreenState extends State<IndexScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    )..repeat(reverse: true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +32,7 @@ class IndexScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/images/memo.png',
-                width: 50,
-              ),
+              AnimatedMemo(controller: _controller),
               const SizedBox(
                 height: 20,
               ),
@@ -30,7 +45,7 @@ class IndexScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 17),
               ),
               const SizedBox(
-                height: 100,
+                height: 70,
               ),
               TextButton(
                 onPressed: () {

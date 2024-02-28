@@ -28,7 +28,9 @@ class FirebaseService {
   // FCM 메시지를 Firestore에 저장하는 메서드
   Future<void> _saveMessageToFirestore(RemoteMessage message) async {
     try {
+      String type = message.data['type'] ?? 'default';
       await _firestore.collection('notifications').add({
+        'type': type,
         'title': message.notification?.title ?? '',
         'body': message.notification?.body ?? '',
         'timestamp': Timestamp.now(), // 현재 시간 사용 또는 메시지의 시간 사용 가능

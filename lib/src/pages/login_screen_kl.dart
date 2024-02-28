@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:capsule/src/pages/bottle_screen_wk.dart';
+import 'package:capsule/src/pages/home_wk.dart';
 import 'package:capsule/src/pages/search_account_screen_kl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -149,7 +151,20 @@ class LogInScreen extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
-              )
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (_) => const Home()));
+                },
+                child: Text(
+                  '테스트 로그인',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

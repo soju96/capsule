@@ -105,21 +105,6 @@ class MyPageScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    Text(
-                      '|',
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        '회원탈퇴',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 16,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    )
                   ],
                 ),
               ],

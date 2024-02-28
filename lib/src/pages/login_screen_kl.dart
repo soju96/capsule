@@ -1,8 +1,9 @@
 import 'dart:convert';
-import 'package:capsule/src/pages/bottle_screen_wk.dart';
+
 import 'package:capsule/src/pages/search_account_screen_kl.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:capsule/src/pages/home_wk.dart';
 
 // 로그인 API 엔드포인트 URL
 const String loginUrl = 'http://10.0.2.2/happy-capsule/login';
@@ -39,14 +40,14 @@ class LogInScreen extends StatelessWidget {
           // 메인 화면으로 이동
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const BottleScreen()),
+            MaterialPageRoute(builder: (context) => const Home()),
           );
         } else {
           // 로그인 실패
           // 오류 메시지 표시
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text("2222"),
+              content: Text("로그인 실패"),
               backgroundColor: Colors.red,
             ),
           );

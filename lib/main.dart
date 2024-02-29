@@ -2,7 +2,6 @@ import 'package:capsule/firebase_options.dart';
 import 'package:capsule/src/pages/guide_wk.dart';
 import 'package:capsule/src/pages/index_screen_wk.dart';
 import 'package:capsule/src/services/firebase_service.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,40 +10,14 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
   FirebaseService().initialize();
 
-  // Firebase 푸시 알림 토큰 초기화
-  // FirebaseNotificationHandler().getDeviceToken();
-  // FirebaseNotificationHandler().requestNotificationPermissions();
-  // FirebaseNotificationHandler().setUpFirebase();
-
-  // notification 설정
-  // String? firebaseToken = await notificationSetting();
-  // await notificationSetting();
-
-  // 앱 최초 실행인지 여부 저장 (가이드 스크린)
+  // 앱 최초 실행인지 여부 저장 (가이드 스크린 or 홈)
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
   Widget initialScreen =
-      isFirstTime ? const Guide(isMyPaged: false) : const IndexScreen();
+      isFirstTime ? const IndexScreen() : const Guide(isMyPaged: false);
   runApp(MyApp(initialScreen: initialScreen));
-}
-
-class FirebaseNotificationToken with ChangeNotifier {
-  String? _token;
-  String? get token => _token;
-
-  // Firebase 푸시 알림 토큰 초기화
-  Future<void> initialize() async {
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
-    _token = await messaging.getToken();
-
-    messaging.onTokenRefresh.listen((newToken) {
-      _token = newToken;
-      notifyListeners();
-    });
-  }
 }
 
 class MyApp extends StatelessWidget {
@@ -89,7 +62,6 @@ class MyApp extends StatelessWidget {
       ),
 
       // 홈
-
       home: initialScreen,
     );
   }

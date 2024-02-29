@@ -1,5 +1,7 @@
+import 'package:capsule/src/pages/home_wk.dart';
 import 'dart:convert';
 import 'package:capsule/src/pages/search_account_screen_kl.dart';
+import 'package:capsule/src/services/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:capsule/src/pages/home_wk.dart';
@@ -11,7 +13,9 @@ final TextEditingController idController = TextEditingController();
 final TextEditingController pwController = TextEditingController();
 
 class LogInScreen extends StatelessWidget {
-  const LogInScreen({super.key});
+  LogInScreen({super.key});
+
+  final FirebaseService _firebaseService = FirebaseService();
 
   // 아이디와 비밀번호를 가지고 로그인 요청을 보내는 함수
   Future<void> loginRequest(context, String id, String pw) async {
@@ -37,6 +41,9 @@ class LogInScreen extends StatelessWidget {
 
         if (response.body.toString() == '1') {
           // 로그인 성공
+
+          String? token = await _firebaseService.getFCMToken();
+          await _firebaseService.saveIdAndToken(id, token!);
           // 로그인 성공 후 사용자 정보 저장
           saveUserId(id); // 사용자 정보 저장
 
@@ -132,11 +139,6 @@ class LogInScreen extends StatelessWidget {
                   print(id);
                   print(pw);
                   loginRequest(context, id, pw); // 로그인 요청 보내기
-                  // Navigator.pushReplacement(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const Home(),
-                  //     ));
                 },
                 child: Text(
                   '로그인',
@@ -158,7 +160,7 @@ class LogInScreen extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

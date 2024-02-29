@@ -82,7 +82,7 @@ class ResultAccountScreenState extends State<ResultAccountScreen> {
               TextButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const LogInScreen()));
+                      MaterialPageRoute(builder: (_) => LogInScreen()));
                 },
                 child: Text(
                   'To Login',

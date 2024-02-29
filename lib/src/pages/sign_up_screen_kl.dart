@@ -40,7 +40,7 @@ class SignUpScreen extends StatelessWidget {
           // 로그인 화면으로 이동
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const LogInScreen()),
+            MaterialPageRoute(builder: (context) => LogInScreen()),
           );
         } else {
           // 회원가입 실패

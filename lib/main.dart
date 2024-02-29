@@ -16,7 +16,7 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
   Widget initialScreen =
-      isFirstTime ? const Guide(isMyPaged: false) : const IndexScreen();
+      isFirstTime ? const IndexScreen() : const Guide(isMyPaged: false);
   runApp(MyApp(initialScreen: initialScreen));
 }
 

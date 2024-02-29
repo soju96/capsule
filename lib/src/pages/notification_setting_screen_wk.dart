@@ -56,6 +56,8 @@ class _NotificationSettingScreenState extends State<NotificationSettingScreen> {
             buildNotificationRow('앱 푸시 알림', _appNotificationChecked, (value) {
               setState(() {
                 _appNotificationChecked = value;
+                _memoNotificationChecked = value;
+                _randomNotificationChecked = value;
                 _saveSettings();
               });
             }),

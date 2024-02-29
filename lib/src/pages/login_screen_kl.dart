@@ -1,8 +1,6 @@
-import 'dart:convert';
-import 'dart:ui';
-import 'package:capsule/src/pages/bottle_screen_wk.dart';
 import 'package:capsule/src/pages/home_wk.dart';
 import 'package:capsule/src/pages/search_account_screen_kl.dart';
+import 'package:capsule/src/services/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,7 +10,9 @@ final TextEditingController idController = TextEditingController();
 final TextEditingController pwController = TextEditingController();
 
 class LogInScreen extends StatelessWidget {
-  const LogInScreen({super.key});
+  LogInScreen({super.key});
+
+  final FirebaseService _firebaseService = FirebaseService();
 
   // 아이디와 비밀번호를 가지고 로그인 요청을 보내는 함수
   Future<void> loginRequest(context, String id, String pw) async {
@@ -38,17 +38,21 @@ class LogInScreen extends StatelessWidget {
 
         if (response.body.toString() == '1') {
           // 로그인 성공
+
+          String? token = await _firebaseService.getFCMToken();
+          await _firebaseService.saveIdAndToken(id, token!);
+
           // 메인 화면으로 이동
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const BottleScreen()),
+            MaterialPageRoute(builder: (context) => const Home()),
           );
         } else {
           // 로그인 실패
           // 오류 메시지 표시
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text("2222"),
+              content: Text("로그인 실패"),
               backgroundColor: Colors.red,
             ),
           );
@@ -125,11 +129,6 @@ class LogInScreen extends StatelessWidget {
                   print(id);
                   print(pw);
                   loginRequest(context, id, pw); // 로그인 요청 보내기
-                  // Navigator.pushReplacement(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const Home(),
-                  //     ));
                 },
                 child: Text(
                   '로그인',
@@ -146,19 +145,6 @@ class LogInScreen extends StatelessWidget {
                 },
                 child: Text(
                   '아이디 / 비밀번호 찾기',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (_) => const Home()));
-                },
-                child: Text(
-                  '테스트 로그인',
                   style: TextStyle(
                     fontSize: 18,
                     color: Theme.of(context).primaryColor,

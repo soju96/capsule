@@ -11,6 +11,7 @@ class FirebaseService {
     _firebaseMessaging.getToken().then((String? token) {
       print("FCM Token: $token");
       // 여기서 토큰을 사용하여 필요한 작업 수행
+      _saveTokenToFirestore(token); // 토큰을 Firestore에 저장
     });
 
     // FCM 메시지 핸들러 등록
@@ -46,5 +47,40 @@ class FirebaseService {
       RemoteMessage message) async {
     print("Handling a background message: ${message.messageId}");
     // 여기서 메시지 처리 가능
+  }
+
+  void _saveTokenToFirestore(String? token) {
+    if (token != null) {
+      try {
+        _firestore.collection('tokens').doc(token).set({
+          'token': token,
+          'timestamp': Timestamp.now(),
+        });
+        print("Token saved to Firestore");
+      } catch (e) {
+        print("Error saving token to Firestore: $e");
+      }
+    }
+  }
+
+  Future<void> saveIdAndToken(String id, String token) async {
+    try {
+      await _firestore.collection('users').doc(id).set({
+        'id': id,
+        'token': token,
+      });
+      print('ID and token saved to Firestore');
+    } catch (e) {
+      print('Error saving ID and token to Firestore: $e');
+    }
+  }
+
+  Future<String?> getFCMToken() async {
+    try {
+      return await _firebaseMessaging.getToken();
+    } catch (e) {
+      print("Error getting FCM token: $e");
+      return null;
+    }
   }
 }

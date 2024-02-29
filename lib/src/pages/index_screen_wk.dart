@@ -1,6 +1,6 @@
 import 'package:capsule/src/pages/login_screen_kl.dart';
 import 'package:capsule/src/pages/sign_up_screen_kl.dart';
-import 'package:capsule/src/widgets/animated_memo.dart';
+import 'package:capsule/src/widgets/animated_memo_wk.dart';
 import 'package:flutter/material.dart';
 
 class IndexScreen extends StatefulWidget {
@@ -50,7 +50,7 @@ class _IndexScreenState extends State<IndexScreen>
               TextButton(
                 onPressed: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (_) => const LogInScreen()));
+                      MaterialPageRoute(builder: (_) => LogInScreen()));
                 },
                 child: Text(
                   '로그인',

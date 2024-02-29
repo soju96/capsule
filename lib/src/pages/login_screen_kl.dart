@@ -1,8 +1,11 @@
 import 'package:capsule/src/pages/home_wk.dart';
+import 'dart:convert';
 import 'package:capsule/src/pages/search_account_screen_kl.dart';
 import 'package:capsule/src/services/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:capsule/src/pages/home_wk.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // 로그인 API 엔드포인트 URL
 const String loginUrl = 'http://10.0.2.2/happy-capsule/login';
@@ -41,6 +44,8 @@ class LogInScreen extends StatelessWidget {
 
           String? token = await _firebaseService.getFCMToken();
           await _firebaseService.saveIdAndToken(id, token!);
+          // 로그인 성공 후 사용자 정보 저장
+          saveUserId(id); // 사용자 정보 저장
 
           // 메인 화면으로 이동
           Navigator.pushReplacement(
@@ -71,6 +76,11 @@ class LogInScreen extends StatelessWidget {
       // 네트워크 오류 등 예외 처리
       print('Error: $e');
     }
+  }
+
+  Future<void> saveUserId(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userId', id);
   }
 
   @override

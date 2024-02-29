@@ -16,7 +16,8 @@ class MemoViewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Memo View'),
+        backgroundColor: Theme.of(context).primaryColor,
+        title: const Text('1번째 저금통'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -29,7 +30,12 @@ class MemoViewPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             // 이미지를 보여주는 위젯 추가 (imageUrl을 사용하여 이미지를 가져옴)
-            // 예시: Image.network(imageUrl),
+            if (imageUrl.isNotEmpty) // 이미지 URL이 비어있지 않은 경우에만 표시
+              Image.network(
+                imageUrl,
+                width: MediaQuery.of(context).size.width, // 이미지 너비를 화면 너비로 설정
+                fit: BoxFit.cover, // 이미지가 찌그러지지 않도록 화면에 맞게 조정
+              ),
             const SizedBox(height: 16),
             Text(
               content,

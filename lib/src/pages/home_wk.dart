@@ -1,4 +1,5 @@
 import 'package:capsule/src/pages/bottle_screen_wk.dart';
+import 'package:capsule/src/pages/memo_bottle_page_sj.dart';
 import 'package:capsule/src/pages/mypage_screen_wk.dart';
 import 'package:capsule/src/widgets/base_floating_button_wk.dart';
 import 'package:flutter/material.dart';

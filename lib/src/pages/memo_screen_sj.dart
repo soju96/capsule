@@ -1,5 +1,8 @@
 import 'dart:io';
+import 'package:capsule/src/pages/home_wk.dart';
+import 'package:capsule/src/pages/memo_bottle_page_sj.dart';
 import 'package:capsule/src/pages/memo_view_page_sj.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -101,15 +104,15 @@ class _MemoInputState extends State<MemoInput> {
       // await prefs.setString('imageUrl', imageUrl); // 이미지 URL 저장
     }
 
-    // Oracle DB에 저장하기 위해 spring boot로 보내기
-    // final response = await http.post(
-    //   Uri.parse('https://your-spring-boot-api-url/memos'), // 스프링 부트 주소 넣기
-    //   body: {
-    //     'keyword': _keywordController.text,
-    //     'content': _contentController.text,
-    //     'imageUuid': imageUuid ?? '', // 이미지 UUID 또는 빈 문자열 전송
-    //   },
-    // ); // 일단 이 걸로 spring boot로 보내고 그 다음에
+//    Oracle DB에 저장하기 위해 spring boot로 보내기
+    final response = await http.post(
+      Uri.parse('https://your-spring-boot-api-url/memos'), // 스프링 부트 주소 넣기
+      body: {
+        'keyword': _keywordController.text,
+        'content': _contentController.text,
+        'imageUuid': imageUuid ?? '', // 이미지 UUID 또는 빈 문자열 전송
+      },
+    ); // 일단 이 걸로 spring boot로 보내고 그 다음에
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -124,11 +127,7 @@ class _MemoInputState extends State<MemoInput> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => MemoViewPage(
-          keyword: _keywordController.text,
-          content: _contentController.text,
-          imageUrl: '$imageUuid', // 이미지 URL을 추가해야 함
-        ),
+        builder: (context) => const MemoBottlePage(),
       ),
     );
   }

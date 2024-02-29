@@ -124,11 +124,11 @@ class LogInScreen extends StatelessWidget {
                   print(id);
                   print(pw);
                   loginRequest(context, id, pw); // 로그인 요청 보내기
-                  // Navigator.pushReplacement(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const Home(),
-                  //     ));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Home(),
+                      ));
                 },
                 child: Text(
                   '로그인',

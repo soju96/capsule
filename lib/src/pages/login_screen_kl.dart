@@ -40,7 +40,7 @@ class LogInScreen extends StatelessWidget {
           // 메인 화면으로 이동
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const JsonParse()),
+            MaterialPageRoute(builder: (context) => MemoList()),
           );
         } else {
           // 로그인 실패

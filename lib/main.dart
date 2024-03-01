@@ -1,6 +1,7 @@
 import 'package:capsule/firebase_options.dart';
 import 'package:capsule/src/pages/guide_wk.dart';
 import 'package:capsule/src/pages/index_screen_wk.dart';
+import 'package:capsule/src/pages/shelf_list_hj.dart';
 import 'package:capsule/src/services/firebase_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -27,7 +28,7 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
   Widget initialScreen =
-      isFirstTime ? const Guide(isMyPaged: false) : const IndexScreen();
+      isFirstTime ? const Guide(isMyPaged: false) : MemoList();
   runApp(MyApp(initialScreen: initialScreen));
 }
 

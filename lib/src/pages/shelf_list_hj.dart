@@ -1,50 +1,73 @@
-import 'package:flutter/material.dart';
 import 'package:capsule/src/models/bottle_hj.dart';
-import '../services/service_hj.dart';
+import 'package:capsule/src/widgets/memo_page_hj.dart';
+import 'package:flutter/material.dart';
 
-class JsonParse extends StatefulWidget {
-  const JsonParse({super.key});
+class MemoList extends StatelessWidget {
+  final List<BottleInfo> bottleList = [];
 
-  @override
-  State<JsonParse> createState() => JsonParseState();
-}
-
-class JsonParseState extends State<JsonParse> {
-  List<CapsuleList> _capsulelist = <CapsuleList>[];
-  bool loading = false;
-
-  @override
-  void initState() {
-    super.initState();
-    Services.getInfo().then((value) {
-      setState(() {
-        _capsulelist = value;
-        loading = true;
-      });
-    });
-  }
+  MemoList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(loading ? 'bottle' : 'Loading'),
+        title: const Text(
+          'Memo List',
+          style: TextStyle(color: Colors.black),
+        ),
+        // actions: [
+        //   DropdownButton(
+        //     items: bottleList
+        //         .map((bottleInfo) => DropdownMenuItem(
+        //               value: bottleInfo,
+        //               child: Text('${bottleInfo.bNo}번 선반'),
+        //             ))
+        //         .toList(),
+        //     onChanged: (BottleInfo? selectedBottle) {
+        //       if (selectedBottle != null) {
+        //         Navigator.push(
+        //           context,
+        //           MaterialPageRoute(
+        //             builder: (context) => MemoPage(bottleInfo: selectedBottle),
+        //           ),
+        //         );
+        //       }
+        //     },
+        //   ),
+        // ],
       ),
       body: ListView.builder(
-        itemCount: _capsulelist.length,
+        scrollDirection: Axis.horizontal,
+        itemCount: bottleList.length,
         itemBuilder: (context, index) {
-          CapsuleList capsule = _capsulelist[index];
-          return ListTile(
-            leading: const Icon(
-              Icons.account_circle_rounded,
-              color: Colors.blue,
+          final BottleInfo bottleInfo = bottleList[index];
+          String imagePath = '';
+          if (bottleInfo.memos.length <= 5) {
+            imagePath = 'assets/images/bottle_5.png';
+          } else if (bottleInfo.memos.length <= 10) {
+            imagePath = 'assets/images/bottle_10.png';
+          } else if (bottleInfo.memos.length <= 15) {
+            imagePath = 'assets/images/bottle_15.png';
+          } else if (bottleInfo.memos.length <= 19) {
+            imagePath = 'assets/images/bottle_19.png';
+          } else {
+            imagePath = 'assets/images/bottle_20.png';
+          }
+          return Container(
+            width: 200,
+            margin: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(8),
             ),
-            trailing: const Icon(
-              Icons.phone_android_outlined,
-              color: Colors.red,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(imagePath),
+                const SizedBox(height: 8),
+                Text('b_date: ${bottleInfo.bDate}'),
+              ],
             ),
-            title: Text(capsule.uId),
-            subtitle: Text(capsule.bDate.toString()),
           );
         },
       ),

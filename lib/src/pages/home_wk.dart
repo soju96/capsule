@@ -1,3 +1,4 @@
+import 'package:capsule/src/models/bottle_hj.dart';
 import 'package:capsule/src/pages/bottle_screen_wk.dart';
 import 'package:capsule/src/pages/shelf_list_hj.dart';
 import 'package:capsule/src/pages/mypage_screen_wk.dart';
@@ -19,7 +20,7 @@ class _HomeState extends State<Home> {
   final List<Widget> _pages = [
     const BottleScreen(),
     const MyPageScreen(),
-    const JsonParse()
+     MemoList()
   ];
 
   @override

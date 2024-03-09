@@ -1,10 +1,16 @@
+import 'package:capsule/src/pages/home_wk.dart';
 import 'dart:convert';
-import 'package:capsule/src/pages/bottle_screen_wk.dart';
 import 'package:capsule/src/pages/search_account_screen_kl.dart';
+<<<<<<< HEAD
 import 'package:capsule/src/services/service_hj.dart';
+=======
+import 'package:capsule/src/services/firebase_service.dart';
+>>>>>>> dev
 import 'package:flutter/material.dart';
 import 'package:capsule/src/pages/shelf_list_hj.dart';
 import 'package:http/http.dart' as http;
+import 'package:capsule/src/pages/home_wk.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // 로그인 API 엔드포인트 URL
 const String loginUrl = 'http://10.0.2.2/happy-capsule/login';
@@ -12,7 +18,9 @@ final TextEditingController idController = TextEditingController();
 final TextEditingController pwController = TextEditingController();
 
 class LogInScreen extends StatelessWidget {
-  const LogInScreen({super.key});
+  LogInScreen({super.key});
+
+  final FirebaseService _firebaseService = FirebaseService();
 
   // 아이디와 비밀번호를 가지고 로그인 요청을 보내는 함수
   Future<void> loginRequest(context, String id, String pw) async {
@@ -38,6 +46,7 @@ class LogInScreen extends StatelessWidget {
 
         if (response.body.toString() == '1') {
           // 로그인 성공
+
           bool memoDataExists = await HttpService.checkMemoDataExistence(id);
 
           if (memoDataExists) {
@@ -50,15 +59,28 @@ class LogInScreen extends StatelessWidget {
             // 메모 데이터가 존재하지 않으면 BottleScreen 페이지로 이동
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const BottleScreen()),
+              MaterialPageRoute(builder: (context) => const Home()),
             );
           }
+
+
+          String? token = await _firebaseService.getFCMToken();
+          await _firebaseService.saveIdAndToken(id, token!);
+          // 로그인 성공 후 사용자 정보 저장
+          saveUserId(id); // 사용자 정보 저장
+
+          // 메인 화면으로 이동
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const Home()),
+          );
+
         } else {
           // 로그인 실패
           // 오류 메시지 표시
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text("2222"),
+              content: Text("로그인 실패"),
               backgroundColor: Colors.red,
             ),
           );
@@ -77,6 +99,11 @@ class LogInScreen extends StatelessWidget {
       // 네트워크 오류 등 예외 처리
       print('Error: $e');
     }
+  }
+
+  Future<void> saveUserId(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userId', id);
   }
 
   @override
@@ -135,11 +162,6 @@ class LogInScreen extends StatelessWidget {
                   print(id);
                   print(pw);
                   loginRequest(context, id, pw); // 로그인 요청 보내기
-                  // Navigator.pushReplacement(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const Home(),
-                  //     ));
                 },
                 child: Text(
                   '로그인',
@@ -161,7 +183,7 @@ class LogInScreen extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

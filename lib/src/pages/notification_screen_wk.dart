@@ -32,8 +32,10 @@ class NotificationScreen extends StatelessWidget {
         ],
       ),
       body: StreamBuilder(
-        stream:
-            FirebaseFirestore.instance.collection('notifications').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('notifications')
+            .orderBy('timestamp', descending: true)
+            .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -53,15 +55,29 @@ class NotificationScreen extends StatelessWidget {
               Timestamp timestamp = snapshot.data!.docs[itemIndex]['timestamp'];
               DateTime dateTime = timestamp.toDate();
               return ListTile(
-                leading: Image.asset(
-                  'assets/images/memo.png',
-                  width: 40,
+                leading: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Image.asset(
+                    'assets/images/memo.png',
+                    width: 40,
+                  ),
                 ),
-                title: Text(snapshot.data!.docs[itemIndex]['title']),
+                title: Text(
+                  snapshot.data!.docs[itemIndex]['title'],
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(snapshot.data!.docs[itemIndex]['body']),
+                    Text(
+                      snapshot.data!.docs[itemIndex]['body'],
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
                     Text(DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime)),
                   ],
                 ),

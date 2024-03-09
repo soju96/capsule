@@ -207,7 +207,7 @@ class _MemoInputState extends State<MemoInput> {
                     controller: _contentController,
                     maxLength: 250, // 최대 글자수 250자
                     decoration: const InputDecoration(
-                      hintText: '당신의 행복을 적어주세요',
+                      hintText: '당신의 행복을 적어주세요.',
                       border: UnderlineInputBorder(), // 밑줄
                     ),
                     maxLines: null,
@@ -218,7 +218,10 @@ class _MemoInputState extends State<MemoInput> {
                     children: [
                       ElevatedButton(
                         onPressed: _getImage,
-                        child: const Text('이미지 넣기'),
+                        child: const Text(
+                          '이미지 넣기',
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                     ],
                   ),

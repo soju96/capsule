@@ -2,13 +2,14 @@ import 'package:capsule/src/models/bottle_hj.dart';
 import 'package:capsule/src/pages/bottle_screen_wk.dart';
 import 'package:capsule/src/pages/shelf_list_hj.dart';
 import 'package:capsule/src/pages/mypage_screen_wk.dart';
+import 'package:capsule/src/services/service_hj.dart';
 
 import 'package:capsule/src/widgets/base_floating_button_wk.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({super.key, required String id});
 
   @override
   State<Home> createState() => _HomeState();
@@ -16,6 +17,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
+  
 
   final List<Widget> _pages = [
     BottleScreen(),
@@ -26,27 +28,25 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    _saveNameToSharedPreferences();
+   
     _loadSharedPreferences();
   }
 
-  Future<void> _saveNameToSharedPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('name', 'heji');
-  }
 
   Future<void> _loadSharedPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? name = prefs.getString('name');
-    if (name == 'heji') {
-      setState(() {
+    bool memoDataExists = await HttpService.checkMemoDataExistence(id);
+
+          if (memoDataExists) {
+            // 메모 데이터가 존재하면 MemoList 페이지로 이동
+            setState(() {
         _selectedIndex = 2;
       });
-    } else {
-      setState(() {
+          } else {
+            // 메모 데이터가 존재하지 않으면 BottleScreen 페이지로 이동
+           setState(() {
         _selectedIndex = 0;
       });
-    }
+          }
   }
 
   void _onItemTapped(int index) {

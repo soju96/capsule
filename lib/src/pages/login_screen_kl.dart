@@ -1,11 +1,11 @@
 import 'package:capsule/src/pages/home_wk.dart';
 import 'dart:convert';
 import 'package:capsule/src/pages/search_account_screen_kl.dart';
-<<<<<<< HEAD
+
 import 'package:capsule/src/services/service_hj.dart';
-=======
+
 import 'package:capsule/src/services/firebase_service.dart';
->>>>>>> dev
+
 import 'package:flutter/material.dart';
 import 'package:capsule/src/pages/shelf_list_hj.dart';
 import 'package:http/http.dart' as http;
@@ -47,21 +47,7 @@ class LogInScreen extends StatelessWidget {
         if (response.body.toString() == '1') {
           // 로그인 성공
 
-          bool memoDataExists = await HttpService.checkMemoDataExistence(id);
-
-          if (memoDataExists) {
-            // 메모 데이터가 존재하면 MemoList 페이지로 이동
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => MemoList()),
-            );
-          } else {
-            // 메모 데이터가 존재하지 않으면 BottleScreen 페이지로 이동
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const Home()),
-            );
-          }
+          
 
 
           String? token = await _firebaseService.getFCMToken();
@@ -72,7 +58,7 @@ class LogInScreen extends StatelessWidget {
           // 메인 화면으로 이동
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const Home()),
+            MaterialPageRoute(builder: (context) => const Home(id:id)),
           );
 
         } else {
